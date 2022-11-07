@@ -2,6 +2,7 @@
 .idea/*
 *.iml
 conf/
+target/*
 
 # Compiled class file
 *.class

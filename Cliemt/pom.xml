@@ -11,6 +11,17 @@
 
     <groupId>com.sim.client</groupId>
     <artifactId>Cliemt</artifactId>
+    
+    <dependencies>
+        <!--本地common-->
+        <dependency>
+            <groupId>com.sim.common</groupId>
+            <artifactId>ZCommom</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+
+    </dependencies>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

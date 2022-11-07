@@ -33,17 +33,52 @@ public class View {
                     System.out.print("input login id pwd:");
                     String pwd = Utility.readString(50);
 
+                    //登录
+                    if (true) {
+                        System.out.println("===========welcom [user " + userId + " ]=============");
+                        while (loop) {
+                            System.out.println("\n=========IM sub menu [user" + userId + "]=======");
+                            System.out.println("\t\t1 show online of user list");
+                            System.out.println("\t\t2 send group of msg");
+                            System.out.println("\t\t3 send private chat of msg");
+                            System.out.println("\t\t4 send local of file");
+                            System.out.println("\t\t9 Exit");
 
-
+                            key = Utility.readInt(0);
+                            switch (key) {
+                                case 1:
+                                    System.out.println("\t\t1 show online of user list");
+                                    break;
+                                case 2:
+                                    System.out.println("\t\t2 send group of msg");
+                                    break;
+                                case 3:
+                                    System.out.println("\t\t3 send private chat of msg");
+                                    break;
+                                case 4:
+                                    System.out.println("\t\t4 send local of file");
+                                    break;
+                                case 9:
+                                    loop = false;
+                                    break;
+                                default:
+                                    System.out.println("Fail Input key!!!");
+                                    continue;
+                            }
+                        }
+                    } else {
+                        System.out.println("login fial!!!");
+                    }
                     break;
-                case 2:
-                    System.exit(0);
+                case 9:
+
+                    loop = false;
                     break;
                 default:
                     System.out.println("Fail Input key!!!");
                     continue;
             }
         }
+        System.out.println("exit system!!!");
     }
-
 }

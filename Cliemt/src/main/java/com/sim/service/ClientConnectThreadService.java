@@ -37,7 +37,7 @@ public class ClientConnectThreadService extends Thread {
 
             try {
                 System.out.println("client thread waiting server msg......");
-                ObjectInputStream inputStream = new ObjectInputStream(this.socket.getInputStream());
+                ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
                 Message msg = (Message) inputStream.readObject();
 
                 //服务端返回的在线列表信息

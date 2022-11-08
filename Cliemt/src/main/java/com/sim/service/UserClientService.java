@@ -45,12 +45,9 @@ public class UserClientService {
         try {
             Socket socket = new Socket(InetAddress.getByName("127.0.0.1"), 9999);
 
-
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
             //send data
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
             objectOutputStream.writeObject(user);
-
-            //刷新缓冲区
             objectOutputStream.flush();
 
             //recver data

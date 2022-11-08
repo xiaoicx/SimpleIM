@@ -1,6 +1,7 @@
 package com.sim.service;
 
 import java.util.HashMap;
+import java.util.Set;
 
 /**
  * @className: ManngerServerConnectClientThreads
@@ -40,6 +41,24 @@ public class ManngerServerConnectClientThreads {
      */
     public static ServerConnectClientThread getServerConnectClientThread(String userId) {
         return serverConnectClientThreadHashMap.get(userId);
+    }
+
+    /**
+     * @Description 获取在线用户
+     * @Author xiaoqi
+     * @Email onxiaoqi@qq.com
+     * @Date 2021-11-08 23:18
+     * @param
+     * @return
+     */
+    public static String getOnlineUsers() {
+        Set<String> userKeySet = serverConnectClientThreadHashMap.keySet();
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String name : userKeySet) {
+            stringBuilder.append(name);
+            stringBuilder.append(" ");
+        }
+        return stringBuilder.toString();
     }
 
 }

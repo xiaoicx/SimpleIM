@@ -1,6 +1,7 @@
 package com.sim.service;
 
 import com.sim.commom.Message;
+import com.sim.commom.MessageType;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -39,7 +40,20 @@ public class ClientConnectThreadService extends Thread {
                 ObjectInputStream inputStream = new ObjectInputStream(this.socket.getInputStream());
                 Message msg = (Message) inputStream.readObject();
 
+                //服务端返回的在线列表信息
+                if (msg.getSendType().equals(MessageType.MESAGE_RET_ONLINE_FRIEND)){
+                    //
+                    String[] onlineUser = msg.getContent().split(" ");
+                    System.out.println("============当前在线用户列表=============");
+                    for (String name : onlineUser) {
+                        System.out.println("用户: " + name);
+                    }
+                    System.out.println("======================================");
 
+
+                }else {
+                    System.out.println("消息为其他类型......");
+                }
 
 
             } catch (IOException e) {

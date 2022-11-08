@@ -60,6 +60,7 @@ public class ServerService {
                     //回送登录成功信息
                     msg.setSendType(MessageType.MESAGE_LOGIN_SUCCEED);
                     objectOutputStream.writeObject(msg);
+                    objectOutputStream.flush();
 
                     //创建一个线程 和客户端保持通讯
                     ServerConnectClientThread serverConnectClientThread = new ServerConnectClientThread(accept, user.getUserId());
@@ -76,6 +77,7 @@ public class ServerService {
                     //回送登录失败信息
                     msg.setSendType(MessageType.MESAGE_LOGIN_FAIL);
                     objectOutputStream.writeObject(msg);
+                    objectOutputStream.flush();
 
                     //关闭socket
                     accept.close();

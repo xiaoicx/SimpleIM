@@ -51,7 +51,9 @@ public class View {
                             key = Utility.readInt(0);
                             switch (key) {
                                 case 1:
-                                    System.out.println("\t\t1 show online of user list");
+//                                    System.out.println("\t\t1 show online of user list");
+                                    userClientService.onLineFriendList();
+
                                     break;
                                 case 2:
                                     System.out.println("\t\t2 send group of msg");

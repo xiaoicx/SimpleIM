@@ -22,6 +22,7 @@ import java.net.Socket;
 @SuppressWarnings("all")
 public class UserClientService {
 
+
     private User user = new User();
 
 
@@ -50,7 +51,6 @@ public class UserClientService {
             objectOutputStream.writeObject(user);
 
             //刷新缓冲区
-//            socket.shutdownOutput();
             objectOutputStream.flush();
 
             //recver data
@@ -65,7 +65,7 @@ public class UserClientService {
                 clientConnectThreadService.start();
 
                 //add thread to list
-                ManagerClientConnectServerThread.addClientConnectServerThread(userId,clientConnectThreadService);
+                ManagerClientConnectServerThread.addClientConnectServerThread(userId, clientConnectThreadService);
 
                 f = true;
 
@@ -84,4 +84,40 @@ public class UserClientService {
         }
         return f;
     }
+
+    /**
+     * @Description 获取服务端在线列表
+     * @Author xiaoqi
+     * @Email onxiaoqi@qq.com
+     * @Date 2021-11-08 22:24
+     * @param
+     * @return
+     */
+    public void onLineFriendList() {
+
+        //MESAGE_GET_ONLINE_FRIEND
+        Message message = new Message();
+        message.setSendType(MessageType.MESAGE_GET_ONLINE_FRIEND);
+        message.setSender(user.getUserId());
+
+        try {
+            //从线程管理池取出当前用户的线程
+            ClientConnectThreadService clientConnectThreadService = ManagerClientConnectServerThread.getClientConnectThreadService(user.getUserId());
+            Socket socket = clientConnectThreadService.getSocket();
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+
+            //发送请求到服务器获取在线列表
+            objectOutputStream.writeObject(message);
+            objectOutputStream.flush();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+
+        }
+
+
+    }
+
+
 }

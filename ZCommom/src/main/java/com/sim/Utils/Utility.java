@@ -9,7 +9,7 @@ import java.util.Scanner;
  * @description: 工具类
  * @author: xiaoqi
  * @version v1.0
- * @create: 2022-11-07 22:08
+ * @create: 2021-11-07 22:08
  **/
 @SuppressWarnings("all")
 public class Utility {

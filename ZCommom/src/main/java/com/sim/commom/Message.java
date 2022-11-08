@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @description: 消息信息对象
  * @author: xiaoqi
  * @version v1.0
- * @create: 2022-11-07 21:41
+ * @create: 2021-11-07 21:41
  **/
 @SuppressWarnings("all")
 public class Message implements Serializable {

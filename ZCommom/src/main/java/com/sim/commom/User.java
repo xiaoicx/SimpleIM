@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @description: 用户信息
  * @author: xiaoqi
  * @version v1.0
- * @create: 2022-11-07 21:40
+ * @create: 2021-11-07 21:40
  **/
 @SuppressWarnings("all")
 public class User implements Serializable {

@@ -7,7 +7,7 @@ package com.sim.commom;
  * @description: 消息类型
  * @author: xiaoqi
  * @version v1.0
- * @create: 2022-11-07 21:49
+ * @create: 2021-11-07 21:49
  **/
 @SuppressWarnings("all")
 public interface MessageType {
@@ -18,7 +18,16 @@ public interface MessageType {
     //登录失败
     String MESAGE_LOGIN_FAIL = "2";
 
-    
+    //普通信息
+    String MESAGE_COMM_MES = "3";
 
+    //获取在线用户列表
+    String MESAGE_GET_ONLINE_FRIEND = "4";
+
+    //返回在线用户列表
+    String MESAGE_RET_ONLINE_FRIEND = "5";
+
+    //客户端请求退出
+    String MESAGE_CLIENT_EXIT = "6";
 
 }

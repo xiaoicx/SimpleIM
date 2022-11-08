@@ -1,6 +1,7 @@
 package com.sim.view;
 
 import com.sim.Utils.Utility;
+import com.sim.service.UserClientService;
 
 /**
  * @className: View
@@ -9,12 +10,15 @@ import com.sim.Utils.Utility;
  * @description:
  * @author: xiaoqi
  * @version v1.0
- * @create: 2022-11-07 21:54
+ * @create: 2021-11-07 21:54
  **/
 @SuppressWarnings("all")
 public class View {
     private boolean loop = true;
     private int key = 0;
+
+    //用户客户端服务
+    private UserClientService userClientService = new UserClientService();
 
     public void mainView() {
 
@@ -34,8 +38,8 @@ public class View {
                     String pwd = Utility.readString(50);
 
                     //登录
-                    if (true) {
-                        System.out.println("===========welcom [user " + userId + " ]=============");
+                    if (userClientService.checkUser(userId,pwd)) {
+                        System.out.println("===========welcom [user " + userId + " login success]=============");
                         while (loop) {
                             System.out.println("\n=========IM sub menu [user" + userId + "]=======");
                             System.out.println("\t\t1 show online of user list");
@@ -68,6 +72,7 @@ public class View {
                         }
                     } else {
                         System.out.println("login fial!!!");
+                        break;
                     }
                     break;
                 case 9:

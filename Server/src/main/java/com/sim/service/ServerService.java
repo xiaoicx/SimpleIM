@@ -55,7 +55,7 @@ public class ServerService {
 
                 Message msg = new Message();
 
-                if (checkUser(user.getUserId(), user.getPasswd())) {
+                if (checkUser(user.getUserId(), user.getPasswd())) {//检测用户登录
 
                     //回送登录成功信息
                     msg.setSendType(MessageType.MESAGE_LOGIN_SUCCEED);

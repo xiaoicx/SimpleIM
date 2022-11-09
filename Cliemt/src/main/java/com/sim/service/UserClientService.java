@@ -112,9 +112,38 @@ public class UserClientService {
         } finally {
 
         }
-
-
     }
 
+    /**
+     * @Description 退出登录 通知服务器结束socket
+     * @Author xiaoqi
+     * @Email onxiaoqi@qq.com
+     * @Date 2021-11-09 15:23
+     * @param
+     * @return
+     */
+    public void loginOut() {
+//        MESAGE_CLIENT_EXIT
+        Message message = new Message();
+        message.setSendType(MessageType.MESAGE_CLIENT_EXIT);
+        message.setSender(user.getUserId());
 
+        try {
+            ClientConnectThreadService clientConnectThreadService = ManagerClientConnectServerThread.getClientConnectThreadService(user.getUserId());
+            Socket clientConnectThreadServiceSocket = clientConnectThreadService.getSocket();
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(clientConnectThreadServiceSocket.getOutputStream());
+
+            //发送退出信息
+            objectOutputStream.writeObject(message);
+            objectOutputStream.flush();
+
+            //退出线程
+            ManagerClientConnectServerThread.removeClientConnectThreadService(user.getUserId());
+            clientConnectThreadService.setFlag(false);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+        }
+    }
 }

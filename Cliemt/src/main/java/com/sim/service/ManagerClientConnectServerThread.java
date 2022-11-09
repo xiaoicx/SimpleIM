@@ -14,9 +14,9 @@ import java.util.HashMap;
 @SuppressWarnings("all")
 public class ManagerClientConnectServerThread {
     //把thread 放入到hashmap中  key=id  value=线程
-    private static HashMap<String,ClientConnectThreadService> clientConnectThreadServiceHashMap = new HashMap<>();
+    private static HashMap<String, ClientConnectThreadService> clientConnectThreadServiceHashMap = new HashMap<>();
 
-    
+
     /**
      * @Description 添加线程到hashmap
      * @Author xiaoqi
@@ -26,8 +26,8 @@ public class ManagerClientConnectServerThread {
      * @param clientConnectThreadService
      * @return
      */
-    public static void addClientConnectServerThread(String userId,ClientConnectThreadService clientConnectThreadService){
-        clientConnectThreadServiceHashMap.put(userId,clientConnectThreadService);
+    public static void addClientConnectServerThread(String userId, ClientConnectThreadService clientConnectThreadService) {
+        clientConnectThreadServiceHashMap.put(userId, clientConnectThreadService);
     }
 
     /**
@@ -38,8 +38,20 @@ public class ManagerClientConnectServerThread {
      * @param UserId
      * @return
      */
-    public static ClientConnectThreadService getClientConnectThreadService(String UserId){
+    public static ClientConnectThreadService getClientConnectThreadService(String UserId) {
         return clientConnectThreadServiceHashMap.get(UserId);
+    }
+
+    /**
+     * @Description 移出监听线程
+     * @Author xiaoqi
+     * @Email onxiaoqi@qq.com
+     * @Date 2021-11-09 17:59
+     * @param userId
+     * @return
+     */
+    public static ClientConnectThreadService removeClientConnectThreadService(String userId) {
+        return clientConnectThreadServiceHashMap.remove(userId);
     }
 
 

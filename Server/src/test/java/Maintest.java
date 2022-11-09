@@ -1,7 +1,9 @@
 import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.Set;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 /**
  * @className: Maintest
@@ -29,9 +31,41 @@ public class Maintest {
         hashMap.put("3", null);
         hashMap.put("4", null);
 
-        Set<Object> keySet = hashMap.keySet();
-        for (Object name : keySet) {
-            System.out.print(name+" ");
+//        Set<Object> keySet = hashMap.keySet();
+//        for (Object name : keySet) {
+//            System.out.print(name+" ");
+//        }
+//        for (Map.Entry<Object, Object> objectEntry : hashMap.entrySet()) {
+//            System.out.println(objectEntry.getKey());
+//            System.out.println(objectEntry.getValue());
+//        }
+
+//        Iterator<Object> iterator = hashMap.keySet().iterator();
+//        while (iterator.hasNext()) {
+//            System.out.println(iterator.next().toString());
+//        }
+
+        Iterator<Object> iterator = hashMap.values().iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next().toString());
         }
+
+    }
+
+    @Test
+    public void t3(){
+        Date date = new Date();
+        System.out.println(date);
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("Y-m-d HH:mm:ss");
+        String format = simpleDateFormat.format(new Date());
+        System.out.println(format);
+
+        System.out.println(LocalDateTime.now());
+
+
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("Y-M-d HH:mm:ss");
+        String s = dateTimeFormatter.format(LocalDateTime.now());
+        System.out.println(s);
     }
 }

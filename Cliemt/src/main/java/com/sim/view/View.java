@@ -1,6 +1,7 @@
 package com.sim.view;
 
 import com.sim.Utils.Utility;
+import com.sim.service.MessageClientService;
 import com.sim.service.UserClientService;
 
 /**
@@ -19,6 +20,9 @@ public class View {
 
     //用户客户端服务
     private UserClientService userClientService = new UserClientService();
+
+    //用户消息服务
+    private MessageClientService messageClientService = new MessageClientService();
 
     public void mainView() {
 
@@ -51,21 +55,31 @@ public class View {
                             key = Utility.readInt(0);
                             switch (key) {
                                 case 1:
-//                                    System.out.println("\t\t1 show online of user list");
-                                    userClientService.onLineFriendList();
 
+                                    userClientService.onLineFriendList();
                                     break;
                                 case 2:
-                                    System.out.println("\t\t2 send group of msg");
+                                    System.out.print("请输入消息内容: ");
+                                    String groupContent = Utility.readString(1000);
+
+                                    messageClientService.sendGroupMsg(groupContent,userId);
                                     break;
                                 case 3:
-                                    System.out.println("\t\t3 send private chat of msg");
+                                    System.out.print("请输入私聊ID(在线): ");
+                                    String getterId = Utility.readString(50);
+                                    System.out.print("请输入聊天内容: ");
+                                    String OneToOneContent = Utility.readString(1000);
+
+                                    //发送消息请求
+                                    messageClientService.sendMsgToOne(OneToOneContent,userId,getterId);
                                     break;
                                 case 4:
                                     System.out.println("\t\t4 send local of file");
                                     break;
                                 case 9:
+                                    userClientService.loginOut();
                                     loop = false;
+                                    System.exit(0);
                                     break;
                                 default:
                                     System.out.println("Fail Input key!!!");
@@ -78,8 +92,10 @@ public class View {
                     }
                     break;
                 case 9:
-
+                    //退出登录
+                    userClientService.loginOut();
                     loop = false;
+                    System.exit(0);
                     break;
                 default:
                     System.out.println("Fail Input key!!!");

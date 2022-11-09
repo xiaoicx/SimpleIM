@@ -30,4 +30,12 @@ public interface MessageType {
     //客户端请求退出
     String MESAGE_CLIENT_EXIT = "6";
 
+    //群发消息
+    String MESAGE_GROUP_MES = "7";
+
+    //私聊发送文件
+    String MESAGE_PRI_FILE_MES = "8";
+
+    //群聊发送文件
+    String MESAGE_GROUP_FILE_MES = "9";
 }

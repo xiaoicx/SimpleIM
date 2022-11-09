@@ -44,6 +44,30 @@ public class ManngerServerConnectClientThreads {
     }
 
     /**
+     * @Description 移出监听线程
+     * @Author xiaoqi
+     * @Email onxiaoqi@qq.com
+     * @Date 2021-11-09 17:59
+     * @param userId
+     * @return
+     */
+    public static ServerConnectClientThread removeServerConnectClientThread(String userId){
+        return serverConnectClientThreadHashMap.remove(userId);
+    }
+    
+    /**
+     * @Description 获取hashmap
+     * @Author xiaoqi
+     * @Email onxiaoqi@qq.com
+     * @Date 2021-11-09 23:50
+     * @param
+     * @return
+     */
+    public static HashMap<String,ServerConnectClientThread> getHashMap(){
+        return serverConnectClientThreadHashMap;
+    }
+
+    /**
      * @Description 获取在线用户
      * @Author xiaoqi
      * @Email onxiaoqi@qq.com

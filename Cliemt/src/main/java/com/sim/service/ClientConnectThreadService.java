@@ -84,6 +84,13 @@ public class ClientConnectThreadService extends Thread {
                     System.out.println("时间: [" + msg.getSendTime() + "] " + msg.getSender() + " 私聊 " + msg.getGeter() + " 接收文件: " + file + "\\" + msg.getFileName());
                     System.out.println("===========================");
 
+                } else if (msg.getSendType().equals(MessageType.MESAGE_PUSH_NEWS)) {//新闻推送
+
+                    String[] content = msg.getContent().split("000000-00001");
+                    System.out.println("========新闻推送(标题:" + content[0] + ")=======");
+                    System.out.println("时间: [" + msg.getSendTime() + "] 新闻内容: " + content[1]);
+                    System.out.println("================================================");
+
                 } else {
                     System.out.println("消息为其他类型......");
                 }

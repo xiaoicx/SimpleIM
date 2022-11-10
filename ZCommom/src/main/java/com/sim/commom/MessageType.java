@@ -37,5 +37,5 @@ public interface MessageType {
     String MESAGE_PRI_FILE_MES = "8";
 
     //群聊发送文件
-    String MESAGE_GROUP_FILE_MES = "9";
+    String MESAGE_PUSH_NEWS = "9";
 }

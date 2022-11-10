@@ -98,6 +98,7 @@ public class MessageClientService {
 
         File file = new File(path);
         message.setFileName(file.getName());
+        message.setContentLength(file.length());
 
 
         BufferedInputStream bufferedInputStream = null;

@@ -109,7 +109,7 @@ public class ServerConnectClientThread extends Thread {
 
                 } else if (msg.getSendType().equals(MessageType.MESAGE_PRI_FILE_MES)) {//转发私聊发送文件
                     System.out.println("消息类型: " + msg.getSendType() + " 发送者: " + msg.getSender()
-                            + "-> 文件信息 文件名: '" + msg.getFileName() + "' 文件大小: " + msg.getFileBytes().length);
+                            + "-> 文件信息 文件名: '" + msg.getFileName() + "' 文件大小: " + msg.getContentLength());
 
                     //获取转发用户信息
                     String msgGeter = msg.getGeter();

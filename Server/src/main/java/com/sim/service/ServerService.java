@@ -1,5 +1,6 @@
 package com.sim.service;
 
+import com.sim.Utils.Utility;
 import com.sim.commom.Message;
 import com.sim.commom.MessageType;
 import com.sim.commom.User;
@@ -24,7 +25,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ServerService {
 
     private ServerSocket serverSocket = null;
-//    private static HashMap<String, User> validUsers = new HashMap<>();
+    //    private static HashMap<String, User> validUsers = new HashMap<>();
     private static ConcurrentHashMap<String, User> validUsers = new ConcurrentHashMap<>();
 
     static {
@@ -68,6 +69,11 @@ public class ServerService {
 
                     //添加线程到list
                     ManngerServerConnectClientThreads.addClientThread(user.getUserId(), serverConnectClientThread);
+
+                    //推送新闻
+                    //MESAGE_PUSH_NEWS
+                    String title = "新闻标题" + (int) (Math.random() * 100);
+                    pushNewMsg(user.getUserId(), title, "新闻内容阿斯蒂芬共和国反倒是惹你的房间可的数据覅化工厂");
 
                 } else {//登录失败
 
@@ -122,5 +128,26 @@ public class ServerService {
         }
 
         return true;
+    }
+
+
+    private void pushNewMsg(String userId, String title, String content) {
+
+        Message message = new Message();
+        message.setSendType(MessageType.MESAGE_PUSH_NEWS);
+        message.setSendTime(Utility.getDateTimeFormat());
+
+        StringBuilder stringBuilder = new StringBuilder(title + "000000-00001" + content);
+        message.setContent(stringBuilder.toString());
+        message.setContentLength((long) stringBuilder.length());
+
+        try {
+            ServerConnectClientThread serverConnectClientThread = ManngerServerConnectClientThreads.getServerConnectClientThread(userId);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(serverConnectClientThread.getSocket().getOutputStream());
+            objectOutputStream.writeObject(message);
+            objectOutputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -23,7 +23,7 @@ public class Message implements Serializable {
     private String sendType;
     private byte[] fileBytes;
     private String fileName;
-//    private Integer contentLength;
+    private Long contentLength;
 
 
     public Message() {
@@ -98,5 +98,13 @@ public class Message implements Serializable {
 
     public void setFileBytes(byte[] fileBytes) {
         this.fileBytes = fileBytes;
+    }
+
+    public Long getContentLength() {
+        return contentLength;
+    }
+
+    public void setContentLength(Long contentLength) {
+        this.contentLength = contentLength;
     }
 }

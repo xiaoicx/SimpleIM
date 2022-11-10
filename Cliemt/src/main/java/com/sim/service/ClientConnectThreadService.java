@@ -3,8 +3,7 @@ package com.sim.service;
 import com.sim.commom.Message;
 import com.sim.commom.MessageType;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.*;
 import java.net.Socket;
 
 /**
@@ -36,6 +35,9 @@ public class ClientConnectThreadService extends Thread {
 
     @Override
     public void run() {
+
+        BufferedOutputStream bufferedOutputStream = null;
+
         //保持一个线程不听的监听服务端请求
         while (flag) {
             try {
@@ -66,6 +68,22 @@ public class ClientConnectThreadService extends Thread {
                     System.out.println("时间: [" + msg.getSendTime() + "] " + msg.getSender() + " 群聊说: " + msg.getContent());
                     System.out.println("===========================");
 
+                } else if (msg.getSendType().equals(MessageType.MESAGE_PRI_FILE_MES)) {//接收私发的文件
+                    System.out.println("========私聊信息(文件)=======");
+
+                    //判断文件是否存在 不存在创建
+                    File file = new File("C:/" + msg.getGeter());
+                    if (!file.exists()) {
+                        file.mkdirs();
+                    }
+
+                    //接收文件
+                    bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(file + "/" + msg.getFileName()));
+                    bufferedOutputStream.write(msg.getFileBytes());
+
+                    System.out.println("时间: [" + msg.getSendTime() + "] " + msg.getSender() + " 私聊 " + msg.getGeter() + " 接收文件: " + file + "\\" + msg.getFileName());
+                    System.out.println("===========================");
+
                 } else {
                     System.out.println("消息为其他类型......");
                 }
@@ -73,6 +91,14 @@ public class ClientConnectThreadService extends Thread {
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
+            } finally {
+                if (bufferedOutputStream != null) {
+                    try {
+                        bufferedOutputStream.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         }
     }

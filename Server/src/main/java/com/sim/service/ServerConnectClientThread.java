@@ -9,7 +9,6 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 
 /**
  * @className: ServerConnectClientThread
@@ -46,7 +45,7 @@ public class ServerConnectClientThread extends Thread {
 
                 if (msg.getSendType().equals(MessageType.MESAGE_GET_ONLINE_FRIEND)) {//获取在线用户列表
                     System.out.println("消息类型: " + msg.getSendType() + " 发送者: " + msg.getSender()
-                            + "->客户端请求在线列表信息");
+                            + "-> 客户端请求在线列表信息");
 
                     //列表形式: 100 200 ...
                     String onlineUsers = ManngerServerConnectClientThreads.getOnlineUsers();
@@ -65,7 +64,7 @@ public class ServerConnectClientThread extends Thread {
 
                 } else if (msg.getSendType().equals(MessageType.MESAGE_CLIENT_EXIT)) {//客户端退出
                     System.out.println("消息类型: " + msg.getSendType() + " 发送者: " + msg.getSender()
-                            + "->客户端退出信息");
+                            + "-> 客户端退出信息");
 
                     //结束监听客户端线程
                     loop = false;
@@ -76,7 +75,7 @@ public class ServerConnectClientThread extends Thread {
 
                 } else if (msg.getSendType().equals(MessageType.MESAGE_COMM_MES)) { //转发聊天消息
                     System.out.println("消息类型: " + msg.getSendType() + " 发送者: " + msg.getSender()
-                            + "->私聊信息");
+                            + "-> 私聊信息");
 
                     //获取转发用户信息
                     String msgGeter = msg.getGeter();
@@ -90,7 +89,7 @@ public class ServerConnectClientThread extends Thread {
 
                 } else if (msg.getSendType().equals(MessageType.MESAGE_GROUP_MES)) {//转发群聊信息
                     System.out.println("消息类型: " + msg.getSendType() + " 发送者: " + msg.getSender()
-                            + "->群聊信息");
+                            + "-> 群聊信息");
 
                     HashMap<String, ServerConnectClientThread> hashMap = ManngerServerConnectClientThreads.getHashMap();
                     Iterator<String> iterator = hashMap.keySet().iterator();
@@ -99,13 +98,27 @@ public class ServerConnectClientThread extends Thread {
                         String userId = iterator.next().toString();
 
                         //排除发送消息的用户 后 转发
-                        if (!userId.equals(msg.getSender())){
+                        if (!userId.equals(msg.getSender())) {
                             ServerConnectClientThread serverConnectClientThread = ManngerServerConnectClientThreads.getServerConnectClientThread(userId);
                             ObjectOutputStream objectOutputStream = new ObjectOutputStream(serverConnectClientThread.getSocket().getOutputStream());
                             objectOutputStream.writeObject(msg);
                             objectOutputStream.flush();
                         }
                     }
+
+
+                } else if (msg.getSendType().equals(MessageType.MESAGE_PRI_FILE_MES)) {//转发私聊发送文件
+                    System.out.println("消息类型: " + msg.getSendType() + " 发送者: " + msg.getSender()
+                            + "-> 文件信息 文件名: '" + msg.getFileName() + "' 文件大小: " + msg.getFileBytes().length);
+
+                    //获取转发用户信息
+                    String msgGeter = msg.getGeter();
+
+                    //获取接收端socket线程 且 转发消息
+                    ServerConnectClientThread serverConnectClientThread = ManngerServerConnectClientThreads.getServerConnectClientThread(msgGeter);
+                    ObjectOutputStream objectOutputStream = new ObjectOutputStream(serverConnectClientThread.getSocket().getOutputStream());
+                    objectOutputStream.writeObject(msg);
+                    objectOutputStream.flush();
 
 
                 } else {

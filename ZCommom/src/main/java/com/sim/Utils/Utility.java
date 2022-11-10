@@ -1,5 +1,8 @@
 package com.sim.Utils;
 
+import java.io.File;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 /**
@@ -176,6 +179,39 @@ public class Utility {
         }
 
         return line;
+    }
+
+    /**
+     * @Description 获取格式化时间
+     * @Author xiaoqi
+     * @Email onxiaoqi@qq.com
+     * @Date 2022-11-10 15:35
+     * @param
+     * @return
+     */
+    public static String getDateTimeFormat(){
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("Y-M-d HH:mm:ss");
+        return dateTimeFormatter.format(LocalDateTime.now());
+    }
+
+    /**
+     * @Description 判断输入的路径是否正确
+     * @Author xiaoqi
+     * @Email onxiaoqi@qq.com
+     * @Date 2022-11-10 15:40
+     * @param path
+     * @return
+     */
+    public static boolean fileIsExists(String path){
+        File file = new File(path);
+        if (file.isDirectory()){
+            return false;
+        }
+
+        if (!file.exists()){
+            return false;
+        }
+        return true;
     }
 
 

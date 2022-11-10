@@ -21,6 +21,9 @@ public class Message implements Serializable {
     private String content;
     private String sendTime;
     private String sendType;
+    private byte[] fileBytes;
+    private String fileName;
+//    private Integer contentLength;
 
 
     public Message() {
@@ -79,5 +82,21 @@ public class Message implements Serializable {
 
     public void setSendType(String sendType) {
         this.sendType = sendType;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public byte[] getFileBytes() {
+        return fileBytes;
+    }
+
+    public void setFileBytes(byte[] fileBytes) {
+        this.fileBytes = fileBytes;
     }
 }

@@ -74,7 +74,18 @@ public class View {
                                     messageClientService.sendMsgToOne(OneToOneContent,userId,getterId);
                                     break;
                                 case 4:
-                                    System.out.println("\t\t4 send local of file");
+                                    System.out.print("请输入私聊ID(在线): ");
+                                    String fileGetterId = Utility.readString(50);
+                                    System.out.print("请输入发送文件的路径(全路径): ");
+                                    String path = Utility.readString(100);
+
+                                    if (!Utility.fileIsExists(path)){
+                                        System.out.println("文件路径输入不正确!");
+                                        break;
+                                    }
+
+                                    //发送私聊文件
+                                    messageClientService.sendPrivateFile(userId,fileGetterId,path);
                                     break;
                                 case 9:
                                     userClientService.loginOut();

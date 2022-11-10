@@ -9,7 +9,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -56,6 +55,7 @@ public class ServerService {
                 Message msg = new Message();
 
                 if (checkUser(user.getUserId(), user.getPasswd())) {//检测用户登录
+                    System.out.println("User id= " + user.getUserId() + " pwd= " + user.getPasswd() + " login success....");
 
                     //回送登录成功信息
                     msg.setSendType(MessageType.MESAGE_LOGIN_SUCCEED);
@@ -68,7 +68,6 @@ public class ServerService {
 
                     //添加线程到list
                     ManngerServerConnectClientThreads.addClientThread(user.getUserId(), serverConnectClientThread);
-
 
                 } else {//登录失败
 

@@ -131,6 +131,16 @@ public class ServerService {
     }
 
 
+    /**
+     * @Description 登录时推送新闻
+     * @Author xiaoqi
+     * @Email onxiaoqi@qq.com
+     * @Date 2022-11-10 17:50
+     * @param userId
+     * @param title
+     * @param content
+     * @return
+     */
     private void pushNewMsg(String userId, String title, String content) {
 
         Message message = new Message();
